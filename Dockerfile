@@ -1,7 +1,7 @@
 #--------- Generic stuff all our Dockerfiles should start with so we get caching ------------
-ARG IMAGE_VERSION=9.0-jdk11-openjdk-slim-buster
+ARG IMAGE_VERSION=latest
 ARG JAVA_HOME=/usr/local/openjdk-11
-FROM tomcat:$IMAGE_VERSION
+FROM unidata/tomcat-docker:$IMAGE_VERSION
 
 LABEL maintainer="Tim Sutton<tim@linfiniti.com>"
 ARG GS_VERSION=2.20.4
@@ -17,8 +17,8 @@ ARG HTTPS_PORT=8443
 
 #Install extra fonts to use with sld font markers
 RUN apt-get -y update; apt-get -y --no-install-recommends install fonts-cantarell lmodern ttf-aenigma \
-    ttf-georgewilliams ttf-bitstream-vera ttf-sjfonts tv-fonts  libapr1-dev libssl-dev  \
-    gdal-bin libgdal-java wget zip unzip curl xsltproc certbot  cabextract gettext postgresql-client figlet
+    fonts-georgewilliams ttf-bitstream-vera ttf-sjfonts tv-fonts  libapr1-dev libssl-dev  \
+    gdal-bin wget zip unzip curl xsltproc certbot  cabextract gettext postgresql-client figlet
 
 RUN set -e \
     export DEBIAN_FRONTEND=noninteractive \
